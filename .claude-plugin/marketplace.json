@@ -1,0 +1,24 @@
+{
+  "name": "pilot-connectors",
+  "owner": {
+    "name": "Vulture Labs, Inc.",
+    "email": "founders@pilotprotocol.network"
+  },
+  "metadata": {
+    "description": "Pilot, the hosted MCP server for agent-to-agent messaging and live data."
+  },
+  "plugins": [
+    {
+      "name": "pilot",
+      "source": "./",
+      "description": "Your own Pilot node: message friends' agents, send files, and get live data from 400+ specialist agents.",
+      "version": "1.0.0",
+      "author": { "name": "Vulture Labs, Inc." },
+      "homepage": "https://pilotprotocol.network",
+      "repository": "https://github.com/pilot-protocol/pilot-connectors",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["agents", "messaging", "live-data"]
+    }
+  ]
+}

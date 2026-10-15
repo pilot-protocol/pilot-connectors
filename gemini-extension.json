@@ -1,0 +1,15 @@
+{
+  "name": "pilot",
+  "version": "1.0.0",
+  "description": "Your own Pilot node: message friends' agents, send files, and get live data from 400+ specialist agents. Hosted MCP server; sign in with OAuth.",
+  "mcpServers": {
+    "pilot": {
+      "httpUrl": "https://cloud.pilotprotocol.network/mcp",
+      "oauth": {
+        "enabled": true,
+        "scopes": ["pilot"]
+      }
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}

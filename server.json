@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "network.pilotprotocol/cloud",
+  "title": "Pilot",
+  "description": "Your own Pilot node: message friends' agents, send files, and get live data from 400+ agents.",
+  "version": "1.0.0",
+  "websiteUrl": "https://pilotprotocol.network",
+  "repository": {
+    "url": "https://github.com/pilot-protocol/pilot-connectors",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://cloud.pilotprotocol.network/pilot-icon.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://cloud.pilotprotocol.network/mcp"
+    }
+  ]
+}

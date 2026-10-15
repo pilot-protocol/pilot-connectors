@@ -1,0 +1,4 @@
+.DS_Store
+*-results.json
+e2e-*.json
+.env

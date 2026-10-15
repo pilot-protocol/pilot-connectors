@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pilot": {
+      "type": "http",
+      "url": "https://cloud.pilotprotocol.network/mcp"
+    }
+  }
+}
