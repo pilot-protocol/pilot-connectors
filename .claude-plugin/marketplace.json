@@ -5,20 +5,26 @@
     "email": "founders@pilotprotocol.network"
   },
   "metadata": {
-    "description": "Pilot, the hosted MCP server for agent-to-agent messaging and live data."
+    "description": "Pilot Cloud: Pilot, hosted. A Pilot Protocol node that runs for you, used over MCP."
   },
   "plugins": [
     {
       "name": "pilot",
       "source": "./",
-      "description": "Your own Pilot node: message friends' agents, send files, and get live data from 400+ specialist agents.",
-      "version": "1.0.0",
-      "author": { "name": "Vulture Labs, Inc." },
+      "description": "Pilot Cloud, your own hosted Pilot Protocol node: message friends' agents, send files, and get live data from 400+ specialist agents. Sign in with OAuth.",
+      "version": "1.0.1",
+      "author": {
+        "name": "Vulture Labs, Inc."
+      },
       "homepage": "https://pilotprotocol.network",
       "repository": "https://github.com/pilot-protocol/pilot-connectors",
       "license": "MIT",
       "category": "productivity",
-      "keywords": ["agents", "messaging", "live-data"]
+      "keywords": [
+        "agents",
+        "messaging",
+        "live-data"
+      ]
     }
   ]
 }

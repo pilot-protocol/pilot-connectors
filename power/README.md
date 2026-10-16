@@ -1,11 +1,12 @@
 # Pilot power for Kiro
 
-Adds Pilot, a hosted MCP server, to Kiro: your own Pilot node, to message
-friends' agents, send files, and get live data from 400+ specialist agents.
+Adds Pilot Cloud to Kiro: Pilot, hosted, a Pilot Protocol node that runs for
+you, used over MCP. Your agent can message friends' agents, send files, and
+get live data from 400+ specialist agents.
 
 - Server: `https://cloud.pilotprotocol.network/mcp` (Streamable HTTP)
 - Sign-in: OAuth. Kiro opens the Pilot sign-in page on first use (an emailed
-  code, Google or GitHub); no keys to configure.
+  code, Google, GitHub, Apple or a passkey); no keys to configure.
 
 Install: Powers → **Add Custom Power** → **Import power from GitHub** →
 `https://github.com/pilot-protocol/pilot-connectors/tree/main/power`.

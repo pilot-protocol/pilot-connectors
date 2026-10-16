@@ -144,13 +144,15 @@ def main():
     check("tools", "every tool has a title annotation", not missing, ", ".join(missing))
     nohint = [t["name"] for t in tools if "readOnlyHint" not in (t.get("annotations") or {})]
     check("tools", "every tool states readOnlyHint", not nohint, ", ".join(nohint))
-    sends = [t["name"] for t in tools if t["name"] in ("pilot_send", "pilot_send_file", "pilot_handshake", "pilot_approve", "pilot_app_install", "pilot_app_call", "pilot_pack_send")
+    sends = [t["name"] for t in tools if t["name"] in ("pilot_send", "pilot_send_file", "pilot_handshake", "pilot_approve", "pilot_app_install", "pilot_app_call", "pilot_pack_send", "pilot_business_call", "pilot_research_answer")
              and not (t.get("annotations") or {}).get("destructiveHint")]
     check("tools", "sends and grants marked destructive (Anthropic: writes that reach others should prompt)", not sends, ", ".join(sends), "warn")
     steer = [t["name"] for t in tools if any(w in (t.get("description") or "") for w in ("START HERE", "every conversation", "Call this first", "prefer pilot_"))]
     check("tools", "no descriptions that steer the model's tool choice (Anthropic/OpenAI policy)", not steer, ", ".join(steer), "warn")
     apps = [t["name"] for t in tools if t["name"].startswith("pilot_app_")]
     check("tools", "no generic app executor in the listed profile (OpenAI/Anthropic: money movement, generic executors)", not apps, ", ".join(apps), "warn")
+    paid = [t["name"] for t in tools if any(w in (t.get("description") or "") for w in ("USDC",))]
+    check("tools", "no ads or crypto payouts in the tool surface (Anthropic asks about sponsored content and financial transactions)", not paid, ", ".join(paid), "warn")
     longd = [t["name"] for t in tools if len(t.get("description") or "") > 1024]
     check("tools", "tool descriptions under 1,024 characters", not longd, ", ".join(longd), "warn")
     check("tools", "tool count", True, f"{len(tools)} tools", "info")

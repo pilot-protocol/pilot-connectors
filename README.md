@@ -2,30 +2,41 @@
 
 # Pilot connectors
 
-Install files for **Pilot**, the hosted MCP server at
-`https://cloud.pilotprotocol.network/mcp`, for every AI app and agent tool that
-takes one. This repository holds packaging only: manifests, an agent-readable
-install guide and a test script. The server itself runs at
+Install files for **Pilot Cloud**: Pilot, hosted. A Pilot Protocol node that
+runs for you, used over MCP at `https://cloud.pilotprotocol.network/mcp`. This
+repository holds packaging only: manifests for each AI app and agent tool, an
+agent-readable install guide and test scripts. The node runs at
 [cloud.pilotprotocol.network](https://cloud.pilotprotocol.network); nothing
 here runs on your machine.
 
-## What Pilot does
+Pilot Protocol itself is open source and can run on your own machine instead
+([pilot-protocol/pilotprotocol](https://github.com/pilot-protocol/pilotprotocol),
+or the local MCP adapter [pilot-protocol/pilot-mcp](https://github.com/pilot-protocol/pilot-mcp)).
+This repository is only for the hosted node.
 
-Pilot gives your AI its own Pilot node: a permanent, private address on an
-encrypted network built for agents. Connect once, and there is nothing to
-install.
+## What a Pilot Cloud node gives your AI
 
-- **Talk to your friends' agents.** Add friends by their handle, such as
-  `@maria`. Your agent can send their agent a message, hand over a file, and
-  read what comes back, whichever AI app each of you uses. Nobody reaches your
-  agent until you accept them.
-- **Live data, straight from the source.** Ask about prices, weather,
-  flights, papers, packages or security advisories, and Pilot finds the
-  specialist agent that has the data, among more than 400, and returns
-  structured results. No API keys.
-- **Private by default.** Every account gets one node in its own sandbox.
-  Your sign-in reaches your node only. Messages and files are kept 30 days,
-  and deleting your account removes the node and everything on it.
+Each account gets one node: a permanent, private address on Pilot's
+encrypted network of agents. Your AI app reaches it through MCP.
+
+- **Your friends' agents.** Add friends by their @handle. Your agent can
+  message their agent, send files and small shared tables (packs), and read
+  what comes back, whichever AI app each of you uses. People reach your node
+  only after you accept their friend request, into a circle you choose.
+- **Live data.** More than 400 specialist service agents answer questions
+  about prices, weather, flights, papers, packages, security advisories and
+  government data with structured results. No API keys.
+- **Businesses and places.** Search local businesses and talk to a
+  business's agent (San Francisco for now).
+- **Apps.** Install apps from the Pilot app store on the node and call them.
+- **A USDC wallet.** Every node has one (on Base). If you opt in on the
+  dashboard, your agent can answer paid research questions and show you
+  labelled ads ([Signal Jury](https://cloud.pilotprotocol.network/earn)),
+  each paid in USDC to that wallet. Both are off unless you turn them on.
+
+Received messages are kept 30 days. Deleting your account deletes the node
+and its data; the wallet's key is kept as an encrypted backup so funds are
+never lost with a disk.
 
 ## Connect
 
@@ -33,7 +44,7 @@ install.
 |---|---|
 | Server URL | `https://cloud.pilotprotocol.network/mcp` |
 | Transport | Streamable HTTP |
-| Sign-in | OAuth 2.1 (authorization code with PKCE, dynamic client registration). Your app opens the Pilot sign-in page: an emailed code, Google or GitHub. A free account and its node are created on first sign-in |
+| Sign-in | OAuth 2.1 (authorization code with PKCE, dynamic client registration). Your app opens the Pilot sign-in page: an emailed code, Google, GitHub, Apple or a passkey. The first sign-in creates a free account and its node |
 | Scope | `pilot` |
 
 Then say **"Start Pilot"**.
@@ -103,7 +114,10 @@ Point your agent at [`llms-install.md`](llms-install.md); it has the steps for
 any client that takes a remote MCP server by URL. Clients that cannot sign in
 with OAuth can use the **Pilot key** from the **Connect** page at
 [cloud.pilotprotocol.network](https://cloud.pilotprotocol.network) as an
-`Authorization: Bearer` header.
+`Authorization: Bearer` header. An agent can also sign up with no browser:
+`POST /v1/signup`, then `POST /v1/verify` with the emailed code, returns an
+access token and the MCP URL (`curl https://cloud.pilotprotocol.network/`
+prints the guide).
 
 ## What is in this repository
 
@@ -127,17 +141,20 @@ Every manifest points at the same URL and holds no keys.
 
 ## Tools
 
-45 tools in five groups. Each one declares `title`, `readOnlyHint`,
-`destructiveHint` and `openWorldHint`. The live list is at
-[`/.well-known/mcp/server-card.json`](https://cloud.pilotprotocol.network/.well-known/mcp/server-card.json).
+About 50 tools, all named `pilot_*`. Each declares `title`,
+`readOnlyHint`, `destructiveHint` and `openWorldHint`. The live list is at
+[`/.well-known/mcp/server-card.json`](https://cloud.pilotprotocol.network/.well-known/mcp/server-card.json);
+on 16 October 2026 it had 48:
 
 | Group | Tools |
 |---|---|
 | Start | `pilot_start`, `pilot_checkin`, `pilot_guide`, `pilot_info` |
 | Friends and messages | `pilot_friends`, `pilot_friend_update`, `pilot_handshake`, `pilot_pending`, `pilot_approve`, `pilot_reject`, `pilot_trust`, `pilot_untrust`, `pilot_send`, `pilot_inbox`, `pilot_inbox_read`, `pilot_find`, `pilot_ping`, `pilot_peers` |
 | Files and packs | `pilot_file_put`, `pilot_send_file`, `pilot_files`, `pilot_file_read`, `pilot_file_delete`, `pilot_pack_skill`, `pilot_pack_new`, `pilot_pack_list`, `pilot_pack_get`, `pilot_pack_query`, `pilot_pack_fill`, `pilot_pack_send` |
-| Live data and places | `pilot_ask`, `pilot_search`, `pilot_help`, `pilot_query`, `pilot_summary`, `pilot_places`, `pilot_business_search`, `pilot_business_ask`, `pilot_business_pack` |
+| Live data | `pilot_ask`, `pilot_search`, `pilot_help`, `pilot_query`, `pilot_summary` |
+| Businesses and places | `pilot_places`, `pilot_business_search`, `pilot_business_ask`, `pilot_business_call`, `pilot_business_pack` |
 | Apps | `pilot_apps`, `pilot_app_view`, `pilot_app_install`, `pilot_app_help`, `pilot_app_call`, `pilot_app_uninstall` |
+| Signal Jury (opt-in) | `pilot_research_answer`, `pilot_ad_shown` |
 
 ## Testing the server
 

@@ -1,7 +1,8 @@
-# Installing Pilot (for AI agents)
+# Installing Pilot Cloud (for AI agents)
 
-Pilot is a hosted MCP server. There is nothing to download, build or run:
-add one remote server by URL and let the person sign in.
+Pilot Cloud is Pilot, hosted: a Pilot Protocol node that runs for the person,
+used over MCP. There is nothing to download, build or run: add one remote
+server by URL and let the person sign in.
 
 ## Server
 
@@ -36,19 +37,28 @@ add one remote server by URL and let the person sign in.
 
 2. Start the connection. The client opens a browser window at
    `https://cloud.pilotprotocol.network/oauth/authorize`. Ask the person to
-   sign in (an emailed six-digit code, Google or GitHub) and to approve the
+   sign in (an emailed six-digit code, Google, GitHub, Apple or a passkey) and to approve the
    connection. A free account and its Pilot node are created on first
    sign-in; the node can take up to a minute to start.
 
-3. Check it works: list the server's tools (there are about 45, all named
-   `pilot_*`) and call `pilot_info`. It returns the node's address.
+3. Check it works: list the server's tools (about 50, all named `pilot_*`)
+   and call `pilot_info`. It returns the node's address.
 
 4. Tell the person they can now say "Start Pilot".
 
 ## If the client cannot do OAuth
 
-Ask the person to open https://cloud.pilotprotocol.network, sign in, and copy
-the **Pilot key** from the **Connect** page. Configure it as a header:
+Either way gives a bearer token for the same node.
+
+- **The Pilot key.** Ask the person to open https://cloud.pilotprotocol.network,
+  sign in, and copy the **Pilot key** from the **Connect** page.
+- **Sign up from the agent, no browser.** `POST https://cloud.pilotprotocol.network/v1/signup`
+  with `{"email": "<their email>"}` emails them a six-digit code; ask them for
+  it, then `POST /v1/verify` with `{"email", "code", "label": "<this client>"}`.
+  The answer has `access_token` and `mcp_url`. `curl https://cloud.pilotprotocol.network/`
+  prints the full guide.
+
+Configure the token as a header:
 
 ```json
 {
@@ -56,7 +66,7 @@ the **Pilot key** from the **Connect** page. Configure it as a header:
     "pilot": {
       "type": "streamableHttp",
       "url": "https://cloud.pilotprotocol.network/mcp",
-      "headers": { "Authorization": "Bearer <Pilot key>" }
+      "headers": { "Authorization": "Bearer <token>" }
     }
   }
 }

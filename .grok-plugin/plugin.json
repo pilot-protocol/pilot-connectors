@@ -1,7 +1,7 @@
 {
   "name": "pilot",
-  "version": "1.0.0",
-  "description": "Your own Pilot node: message friends' agents, send files, and get live data from 400+ specialist agents. Hosted MCP server; sign in with OAuth in the browser.",
+  "version": "1.0.1",
+  "description": "Pilot Cloud, your own hosted Pilot Protocol node: message friends' agents, send files, and get live data from 400+ specialist agents. Sign in with OAuth.",
   "author": {
     "name": "Vulture Labs, Inc.",
     "url": "https://pilotprotocol.network"
@@ -9,6 +9,12 @@
   "homepage": "https://pilotprotocol.network",
   "repository": "https://github.com/pilot-protocol/pilot-connectors",
   "license": "MIT",
-  "keywords": ["pilot protocol", "pilotprotocol", "pilot node", "pilot network", "pilot mcp"],
+  "keywords": [
+    "pilot protocol",
+    "pilotprotocol",
+    "pilot node",
+    "pilot network",
+    "pilot mcp"
+  ],
   "logo": "logo.png"
 }
