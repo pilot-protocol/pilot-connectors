@@ -225,7 +225,11 @@ def main():
     s, _, raw = req("POST", tok, form={"grant_type": "refresh_token", "refresh_token": "nope", "client_id": cid})
     check("token", "bogus refresh token refused", s in (400, 401), f"HTTP {s} {(jbody(raw) or {}).get('error')}")
     s, _, raw = req("POST", tok, form={"grant_type": "client_credentials", "scope": "pilot"})
-    check("token", "client_credentials grant (AWS AgentCore Gateway)", s == 200, f"HTTP {s} {(jbody(raw) or {}).get('error')}", "warn")
+    # With no client the grant must still be known: the answer is about the
+    # client (invalid_client), not unsupported_grant_type. A real token needs
+    # a kit's sign-in details (PILOT_CLIENT_ID / PILOT_CLIENT_SECRET, below).
+    e = (jbody(raw) or {}).get("error")
+    check("token", "client_credentials grant known (AWS AgentCore Gateway, Salesforce)", s in (400, 401) and e != "unsupported_grant_type", f"HTTP {s} {e}")
     kid, ksec = os.environ.get("PILOT_CLIENT_ID"), os.environ.get("PILOT_CLIENT_SECRET")
     if kid and ksec:
         basic = "Basic " + base64.b64encode(f"{urllib.parse.quote(kid)}:{urllib.parse.quote(ksec)}".encode()).decode()

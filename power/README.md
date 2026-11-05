@@ -6,7 +6,8 @@ get live data from 400+ specialist agents.
 
 - Server: `https://cloud.pilotprotocol.network/mcp` (Streamable HTTP)
 - Sign-in: OAuth. Kiro opens the Pilot sign-in page on first use (an emailed
-  code, Google, GitHub, Apple or a passkey); no keys to configure.
+  code, Google, GitHub, Apple or a Pilot Identity hardware key); no keys to
+  configure.
 
 Install: Powers → **Add Custom Power** → **Import power from GitHub** →
 `https://github.com/pilot-protocol/pilot-connectors/tree/main/power`.

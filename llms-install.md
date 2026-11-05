@@ -37,7 +37,7 @@ server by URL and let the person sign in.
 
 2. Start the connection. The client opens a browser window at
    `https://cloud.pilotprotocol.network/oauth/authorize`. Ask the person to
-   sign in (an emailed six-digit code, Google, GitHub, Apple or a passkey) and to approve the
+   sign in (an emailed six-digit code, Google, GitHub, Apple or a Pilot Identity hardware key) and to approve the
    connection. A free account and its Pilot node are created on first
    sign-in; the node can take up to a minute to start.
 
